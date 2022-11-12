@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaining Promises</title>
+</head>
+<body>
+    <h1>Working HTML</h1>
+
+
+    <script>
+
+        let p = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                console.log("it has been started");
+                resolve(100);
+            }, 2000)
+
+        })
+
+        p.then((value)=>{
+            setTimeout(()=>{
+                console.log("chain two working " + value);
+                
+            }, 3000);
+            return 100;
+        }).then((value)=>{
+            setTimeout(()=>{
+                console.log("chain three working "+ value);
+            }, 2000)
+            return "last";
+        }).then((value)=>{
+
+            console.log("final chain" + value);
+        })
+
+    </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load script</title>
+</head>
+<body>
+    <p>load script form ascync and await</p>
+
+
+    <script>
+
+        async function loadScript(src){
+            let p = new Promise((resolve, reject)=>{
+                let script = document.createElement("script");
+                script.src = src;
+                script.onload = ()=>{
+                    resolve(100);
+                }
+
+                script.onerror = ()=>{
+                    reject(new Error("error on loading script"));
+                }
+
+                document.body.appendChild(script);
+
+            })
+
+            console.log("before await " + new Date().getMilliseconds());
+            let val = await p;
+            console.log("after aawait "+ new Date().getMilliseconds());
+            return p;
+
+        }
+
+
+        let p1 = loadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js");
+        p1.then((value)=>{
+            console.log("loading script accomplished")
+        }).catch((error)=>{
+            console.log("error occured "+ error);
+        })
+    </script>
+</body>
+</html>

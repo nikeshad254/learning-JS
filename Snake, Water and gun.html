@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake, Water & Gun Game</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        let str = "";
+        let strUsr = "";
+        let round = 5;
+        let score = 0;
+        let play = 0;
+        let win;
+        // snake = 0; water = 1; gun = 2; 
+        let winRound = (pc , user)=>{
+            //if user wins then true
+            
+
+
+            if(user == 0){
+                strUsr = "Snake"
+                
+                win = (pc==1)?true:false;
+            }
+            else if(user == 1){
+                strUsr = "Water"
+
+                win = (pc==2)?true:false;
+            }
+            else if( user == 2){
+                strUsr = "Gun"
+
+                win = (pc==0)?true:false;
+            }
+            return win;
+
+        }
+
+        while(play<5){
+            let PC = Math.floor(Math.random() * 3);
+            if(PC == 0){
+                str = "Snake";
+            }
+            else if(PC == 1){
+                str == "Water";
+            }
+            else if(PC == 2){
+                str == "Gun"; 
+            }
+            
+            let ans = prompt(" Snake = 0, Water = 1 & Gun = 2 ? ");
+            ans = Number.parseInt(ans);
+            if(ans == 0 || ans == 1 || ans == 2){ 
+                play = play + 1;
+                
+                let win = winRound(PC, ans);
+                if(win){
+                    score++;
+                    alert("PC = "+ str +" , User = "+ strUsr + " , You Won! Score is "+ score);
+                }else{
+                    alert("PC = "+ str +" , User = "+ strUsr + " , You [LOST]!!! Score is "+ score);
+                }
+
+            }
+            else{
+                alert("Error that value is not accepted");
+            }
+        }
+        document.write(" Final Score ==> "+ score);
+
+
+    </script>
+
+</body>
+</html>

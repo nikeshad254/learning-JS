@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback - tut 52</title>
+</head>
+<body>
+    
+    <h3>Call Back and handeling basic callback error</h3>
+
+
+    <script>
+
+        function LoadScript(src, callBack){
+
+            var script = document.createElement("script");
+            script.src = src;
+            script.onload = ()=>{
+                console.log("Script is loaded")
+                callBack(null, src);
+            }
+
+            script.onerror = ()=>{
+                console.log("error occured while loading script");
+                callBack(new Error("got some error from loadscript"));
+            }
+
+            document.body.appendChild(script);
+        }
+
+        function hello(error, script){
+            if(error){
+                console.log(error);
+                return;
+            }
+            alert("Script Loading Sucessfull");
+        }
+
+        LoadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js", hello);
+
+
+
+    </script>
+</body>
+</html>
